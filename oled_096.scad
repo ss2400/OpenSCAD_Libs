@@ -1,16 +1,16 @@
-// hx711.scad - HX711 Mount in OpenSCAD
+// oled_096.scad - OLED 0.96" screen in OpenSCAD
 $fn=100;
+
 
 Height = 5;     // Bottom of PCB
 Slop = 0.1;     // Fitment slop
 
 // PCB parameters
-L = 33.6;       // PCB Length
-W = 20.5;       // PCB Width
+L = 43.18;      // PCB Length
+W = 17.78;      // PCB Width
 T = 1.6;        // PCB Thickness
-Hole = 3;       // Hole size
-Offset1 = 4.4;  // Hole offset from edge
-Offset2 = 2.4;  // Hole offset from edge
+Hole = 1.77;    // Hole size
+Offset = 1.27;  // Hole offset from edge
 
 // Mount parameters
 Mnt_Lip = 3;
@@ -19,27 +19,36 @@ Mnt_L = L + Mnt_Lip/2;
 Mnt_W = W;
 Mnt_T = 2; 
 
-hx711();
-//hx711_mount();
+//nano();
+//nano_mount();
 
-module hx711() {
+module nano() {
     
     translate([0, Mnt_T/2, 0]) {
+    
+        translate([3, W/2, Height+T+2])
+            rotate([0,180,270])
+                %import("587.stl", convexity =4);
+    
         difference() {
             // PCB
             translate([0, 0, Height])
                 %cube([L, W, T]);
 
             // Holes
-            translate([L-Offset1, W-Offset2, Height+T/2])
+            translate([L-Offset, W-Offset, Height+T/2])
                 %cylinder(h = 2*T, d = Hole, center = true);
-            translate([L-Offset1, Offset2, Height+T/2])
+            translate([L-Offset, Offset, Height+T/2])
                 %cylinder(h = 2*T, d = Hole, center = true);
+            translate([Offset, W-Offset, Height+T/2])
+                %cylinder(h = 2*T, d = Hole, center = true); 
+            translate([Offset, Offset, Height+T/2])
+                %cylinder(h = 2*T, d = Hole, center = true); 
         }
     }
 }
 
-module hx711_mount() {
+module nano_mount() {
     difference() {
         union() {
         // Create 1st side

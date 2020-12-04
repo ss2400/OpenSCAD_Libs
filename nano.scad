@@ -1,9 +1,6 @@
 // nano.scad - Arduino Nano Mount in OpenSCAD
 $fn=100;
 
-//use <Knochi/connectors.scad>
-
-
 Height = 5;     // Bottom of PCB
 Slop = 0.1;     // Fitment slop
 
