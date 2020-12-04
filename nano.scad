@@ -27,7 +27,7 @@ module nano() {
     
         translate([3, W/2, Height+T+2])
             rotate([0,180,270])
-                %import("587.stl", convexity =4);
+                %import("stl/587.stl", convexity =4);
     
         difference() {
             // PCB

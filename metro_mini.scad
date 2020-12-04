@@ -24,7 +24,7 @@ Mnt_T = 2;
 module metro_mini() {
     translate([0, Mnt_T/2, Height])
         rotate([0,0,0])
-            %import("2590 Metro Mini Rev B.stl", convexity =4);
+            %import("stl/2590 Metro Mini Rev B.stl", convexity =4);
 }
 
 module metro_mini_mount() {
