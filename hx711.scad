@@ -1,17 +1,16 @@
-// nano.scad - Arduino Nano Mount in OpenSCAD
+// hx711.scad - HX711 Mount in OpenSCAD
 $fn=100;
-
-use <Knochi/connectors.scad>
 
 Height = 5;     // Bottom of PCB
 Slop = 0.1;     // Fitment slop
 
 // PCB parameters
-L = 43.18;      // PCB Length
-W = 17.78;      // PCB Width
+L = 33.6;       // PCB Length
+W = 20.5;       // PCB Width
 T = 1.6;        // PCB Thickness
-Hole = 1.77;    // Hole size
-Offset = 1.27;  // Hole offset from edge
+Hole = 3;       // Hole size
+Offset1 = 4.4;  // Hole offset from edge
+Offset2 = 2.4;  // Hole offset from edge
 
 // Mount parameters
 Mnt_Lip = 3;
@@ -20,36 +19,27 @@ Mnt_L = L + Mnt_Lip/2;
 Mnt_W = W;
 Mnt_T = 2; 
 
-//nano();
-//nano_mount();
+//hx711();
+//hx711_mount();
 
-module nano() {
+module hx711() {
     
     translate([0, Mnt_T/2, 0]) {
-    
-        translate([1, W/2, Height+T])
-            rotate([0,0,270])
-                %mUSB();
-    
         difference() {
             // PCB
             translate([0, 0, Height])
                 %cube([L, W, T]);
 
             // Holes
-            translate([L-Offset, W-Offset, Height+T/2])
+            translate([L-Offset1, W-Offset2, Height+T/2])
                 %cylinder(h = 2*T, d = Hole, center = true);
-            translate([L-Offset, Offset, Height+T/2])
+            translate([L-Offset1, Offset2, Height+T/2])
                 %cylinder(h = 2*T, d = Hole, center = true);
-            translate([Offset, W-Offset, Height+T/2])
-                %cylinder(h = 2*T, d = Hole, center = true); 
-            translate([Offset, Offset, Height+T/2])
-                %cylinder(h = 2*T, d = Hole, center = true); 
         }
     }
 }
 
-module nano_mount() {
+module hx711_mount() {
     difference() {
         union() {
         // Create 1st side
