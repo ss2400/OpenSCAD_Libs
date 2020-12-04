@@ -8,7 +8,7 @@ Slop = 0.1;     // Fitment slop
 // PCB parameters
 L = 43.18;      // PCB Length
 W = 17.78;      // PCB Width
-T = 1;          // PCB Thickness
+T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
