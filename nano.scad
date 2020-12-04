@@ -1,7 +1,8 @@
 // nano.scad - Arduino Nano Mount in OpenSCAD
 $fn=100;
 
-use <Knochi/connectors.scad>
+//use <Knochi/connectors.scad>
+
 
 Height = 5;     // Bottom of PCB
 Slop = 0.1;     // Fitment slop
@@ -27,9 +28,9 @@ module nano() {
     
     translate([0, Mnt_T/2, 0]) {
     
-        translate([1, W/2, Height+T])
-            rotate([0,0,270])
-                %mUSB();
+        translate([3, W/2, Height+T+2])
+            rotate([0,180,270])
+                %import("587.stl", convexity =4);
     
         difference() {
             // PCB
