@@ -6,3 +6,5 @@ https://www.thingiverse.com/thing:2183361
 OLED case
 https://www.thingiverse.com/thing:2183378/files
 
+Adafruit CAD parts
+https://github.com/adafruit/Adafruit_CAD_Parts
