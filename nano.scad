@@ -18,8 +18,8 @@ Mnt_L = L + Mnt_Lip/2;
 Mnt_W = W;
 Mnt_T = 2; 
 
-//nano();
-//nano_mount();
+nano();
+nano_mount();
 
 module nano() {
     
@@ -27,7 +27,7 @@ module nano() {
     
         translate([3, W/2, Height+T+2])
             rotate([0,180,270])
-                %import("stl/587.stl", convexity =4);
+                %import("models/587.stl", convexity =4);
     
         difference() {
             // PCB
