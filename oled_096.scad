@@ -4,7 +4,7 @@ $fn = 36;
 include <OpenSCAD_Libs/models/096OledDim.scad>; // OLED screen dimensions
 use <OpenSCAD_Libs/models/096Oled.scad>; // OLED screen model
 
-slop = 0.4;
+slop = 0.6;
 
 module oled_cutout() {
       // Cutout volume over the view area
