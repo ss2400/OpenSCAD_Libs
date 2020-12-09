@@ -24,8 +24,8 @@ module oled_cutout() {
 
     // Connector cutout (glass side)
     DisplayLocalize(type=I2C4, align=2, dalign=1)
-        translate([0, I2C4_PL/2-I2C4_CYO, I2C4_SSH/4])
-            cube([I2C4_CFW, I2C4_CFL, I2C4_SSH/2], center=true);
+        translate([0, I2C4_PL/2-I2C4_CYO, I2C4_SSH/2])
+            cube([I2C4_CFW, I2C4_CFL, I2C4_SSH], center=true);
 }
 
 // Posts
@@ -40,8 +40,8 @@ module oled_posts() {
 
 difference() {
     translate([0,0,2.2])
-        // 4mm faceplate
-        cube([35,35,4], center=true);
+        // 3mm faceplate
+        cube([35,35,3], center=true);
 
     oled_cutout();
 }
