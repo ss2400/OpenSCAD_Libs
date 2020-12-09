@@ -10,12 +10,14 @@ T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
+Mnt_T = 2;
+Mnt_Lip = 3;
+        
 // Examples
 nano(h=10);
 nano_mount(h=10);
 
 module nano(h=5) {
-    
     translate([0, Mnt_T/2, 0]) {
     
         translate([3, W/2, h+T+2])
@@ -42,11 +44,9 @@ module nano(h=5) {
 
 module nano_mount(h=5) {
 	// Mount parameters
-	Mnt_Lip = 3;
 	Mnt_H = h + T + 1;
 	Mnt_L = L + Mnt_Lip/2;
 	Mnt_W = W;
-	Mnt_T = 2; 
 
     difference() {
         union() {

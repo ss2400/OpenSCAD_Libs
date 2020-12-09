@@ -11,6 +11,9 @@ Hole = 3;       // Hole size
 Offset1 = 4.4;  // Hole offset from edge
 Offset2 = 2.4;  // Hole offset from edge
 
+Mnt_T = 2; 
+Mnt_Lip = 3;
+    
 // Examples
 hx711(h);
 hx711_mount(h=5);
@@ -34,11 +37,9 @@ module hx711(h=5) {
 
 module hx711_mount(h=5) {
 	// Mount parameters
-	Mnt_Lip = 3;
 	Mnt_H = h + T + 1;
 	Mnt_L = L + Mnt_Lip/2;
 	Mnt_W = W;
-	Mnt_T = 2; 
 	
     difference() {
         union() {
