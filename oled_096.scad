@@ -4,8 +4,9 @@ $fn = 36;
 include <OpenSCAD_Libs/models/096OledDim.scad>; // OLED screen dimensions
 use <OpenSCAD_Libs/models/096Oled.scad>; // OLED screen model
 
-slop = 0.5; // Additional tollerance built in
-face = 3.0; // Face plate thickness
+post_slop = 0.5;  // Additional tolerance for posts
+glass_slop = 0.7; // Additional tolerance for glass
+face = 3.0;       // Face plate thickness
 
 // OLED cutout for difference
 module oled_cutout() {
@@ -17,7 +18,7 @@ module oled_cutout() {
   // Over the module glass... (Increased by slop)
   DisplayLocalize(type=I2C4, align=1, dalign=2)
     translate([0,0,(I2C4_LH+0.1)/2])
-      cube([I2C4_LGW+slop, I2C4_LGL+slop, I2C4_LH], center=true);
+      cube([I2C4_LGW+glass_slop, I2C4_LGL+glass_slop, I2C4_LH], center=true);
 
   // Internal flat cable
   DisplayLocalize(type=I2C4, align=4, dalign=1)
@@ -36,7 +37,7 @@ module oled_posts() {
     hull() {
       for (j=[0:1:len(HOLES[I2C4][i])-1])
         translate([HOLES[I2C4][i][j][1][0], HOLES[I2C4][i][j][1][1], -0.4])
-          cylinder(d=HOLES[I2C4][i][j][0]-slop, h=PCB[I2C4][0][2]+1.5, center=true);
+          cylinder(d=HOLES[I2C4][i][j][0]-post_slop, h=PCB[I2C4][0][2]+1.5, center=true);
     }
 }
 

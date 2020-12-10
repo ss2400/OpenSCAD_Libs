@@ -160,8 +160,8 @@ I2CSPI7_COLORS = [
 
 // --- I2C 4 pins display ---
 // PCB
-I2C4_PW = 27.3; //27.0      // PCB width (X)
-I2C4_PL = 27.3;             // PCB length (Y)
+I2C4_PW = 27.4; //27.0      // PCB width (X)
+I2C4_PL = 27.9;             // PCB length (Y)
 I2C4_PH = 1.0;              // PCB height (without components) (Z)
 I2C4_PCW = 15.1;            // PCB Y cutout window(s) width
 I2C4_PCL = 1.4;             // PCB Y cutout window(s) length
@@ -173,8 +173,8 @@ I2C4_LGL = 19.2;            // OLED glass length (Y)
 I2C4_LGLO = 4.0;            // OLED glass length offset (-Y)
 I2C4_LDW = I2C4_LGW;        // OLED display zone width (X)
 I2C4_LDL = 14.8;            // OLED display zone length (Y)
-I2C4_LVW = 21.8;            // OLED view area width (X)    
-I2C4_LVL = 11.4;            // OLED view area length (Y)
+I2C4_LVW = 22.4; // 21.8    // OLED view area width (X)    
+I2C4_LVL = 12.0; // 11.4    // OLED view area length (Y)
 // Bottom side components
 I2C4_CFW = 10.2;            // Connector Width (X)
 I2C4_CFL = 2.54;            // Connector Length (Y)
@@ -200,23 +200,23 @@ I2C4_HOLES = [
 //           Grouped by a 'hull' function
         // Top Left
         [
-            [2.2, [ -10.4, 11.7]],
-            [2.2, [ -10.4, 11.7]],
+            [2.2, [ -11.7, 12.0]],
+            [2.2, [ -11.7, 12.0]],
         ],
         // Top Right
         [
-            [2.2, [ 10.4, 11.7]],
-            [2.2, [ 10.4, 11.7]],
+            [2.2, [ 11.7, 12.0]],
+            [2.2, [ 11.7, 12.0]],
         ],
         // Bottom Left
         [
-            [2.2, [ -10.4, -11.7]],
-            [2.2, [ -10.4, -11.7]],
+            [2.2, [ -11.7, -12.0]],
+            [2.2, [ -11.7, -12.0]],
         ],
         // Bottom Right
         [
-            [2.2, [ 10.4, -11.7]],
-            [2.2, [ 10.4, -11.7]],
+            [2.2, [ 11.7, -12.0]],
+            [2.2, [ 11.7, -12.0]],
         ]
     ];
 /*
