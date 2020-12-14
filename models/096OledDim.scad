@@ -169,18 +169,18 @@ I2C4_PCOR = 1.0;            // PCB corner radius
 // OLED
 I2C4_LH = 1.8;              // OLED glass height (Z)
 I2C4_LGW = I2C4_PW;         // OLED glass width (X)
-I2C4_LGL = 19.2;            // OLED glass length (Y)
-I2C4_LGLO = 4.0;            // OLED glass length offset (-Y)
+I2C4_LGL = 19.4; // 19.2    // OLED glass length (Y)
+I2C4_LGLO = 4.0;            // OLED glass length offset (-Y) /top
 I2C4_LDW = I2C4_LGW;        // OLED display zone width (X)
-I2C4_LDL = 14.8;            // OLED display zone length (Y)
-I2C4_LVW = 22.4; // 21.8    // OLED view area width (X)    
-I2C4_LVL = 12.0; // 11.4    // OLED view area length (Y)
+I2C4_LDL = 15.7; //14.8     // OLED display zone length (Y)
+I2C4_LVW = 22.8; // 21.8    // OLED view area width (X)    
+I2C4_LVL = 12.6; // 11.4    // OLED view area length (Y)
 // Bottom side components
 I2C4_CFW = 10.2;            // Connector Width (X)
 I2C4_CFL = 2.54;            // Connector Length (Y)
 I2C4_CFH = 8.4;             // Connector Height (Z)
-I2C4_CYO = 0.4 + I2C4_CFL/2;  // Connector Y offset (from PCB Y+ border / top)
-I2C4_SSH = 2.0;      // Solder side (glass side) height
+I2C4_CYO = 0.4 + I2C4_CFL/2;// Connector Y offset (from PCB Y+ border / top)
+I2C4_SSH = 2.0;             // Solder side (glass side) height
 // Text (top side)
 I2C4_TXT = [
             ];

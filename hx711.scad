@@ -18,7 +18,7 @@ Mnt_Lip = 3;
 hx711(h);
 hx711_mount(h=5);
 
-module hx711(h=5) {
+module hx711(h=5, center=false) {
   translate([0, Mnt_T/2, 0]) {
     difference() {
       // PCB
@@ -34,7 +34,7 @@ module hx711(h=5) {
   }
 }
 
-module hx711_mount(h=5) {
+module hx711_mount(h=5, center=false) {
   // Mount parameters
   Mnt_H = h + T + 1;
   Mnt_L = L + Mnt_Lip/2;

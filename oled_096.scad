@@ -4,8 +4,8 @@ $fn = 36;
 include <OpenSCAD_Libs/models/096OledDim.scad>; // OLED screen dimensions
 use <OpenSCAD_Libs/models/096Oled.scad>; // OLED screen model
 
-post_slop = 0.5;  // Additional tolerance for posts
-glass_slop = 0.7; // Additional tolerance for glass
+post_slop = 0.6;  // Additional tolerance for posts
+glass_slop = 1.0; // Additional tolerance for glass
 face = 3.0;       // Face plate thickness
 
 // OLED cutout for difference

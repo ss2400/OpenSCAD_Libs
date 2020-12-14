@@ -1,7 +1,7 @@
 // nano.scad - Arduino Nano Mount in OpenSCAD
 $fn=100;
 
-Slop = 0.1;     // Fitment slop
+Slop = 0.2;     // Fitment slop
 
 // PCB parameters
 L = 43.18;      // PCB Length
@@ -10,7 +10,7 @@ T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
-Mnt_T = 2;
+Mnt_T = 2.5;
 Mnt_Lip = 3;
         
 // Examples
