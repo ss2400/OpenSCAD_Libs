@@ -37,7 +37,7 @@ module oled_posts() {
     hull() {
       for (j=[0:1:len(HOLES[I2C4][i])-1])
         translate([HOLES[I2C4][i][j][1][0], HOLES[I2C4][i][j][1][1], -0.4])
-          cylinder(d=HOLES[I2C4][i][j][0]-post_slop, h=PCB[I2C4][0][2]+1.5, center=true);
+          cylinder(d=HOLES[I2C4][i][j][0]-post_slop, h=PCB[I2C4][0][2]+2, center=true);
     }
 }
 

@@ -1,7 +1,7 @@
 // nano.scad - Arduino Nano Mount in OpenSCAD
 $fn=100;
 
-Slop = 0.2;     // Fitment slop
+Slop = 0.1;     // Fitments slop
 
 // PCB parameters
 L = 43.18;      // PCB Length
@@ -10,12 +10,14 @@ T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
-Mnt_T = 2.5;
-Mnt_Lip = 3;
-        
+Mnt_T = 1.5;    // Mount width
+Mnt_FrontLip = 2;    // Mount lips
+Mnt_RearLip = 4;    // Mount lips
+
 // Examples
 nano(h=10);
 nano_mount(h=10);
+cube([50,22,3]);
 
 module nano(h=5) {
   translate([0, Mnt_T/2, 0]) {
@@ -45,7 +47,7 @@ module nano(h=5) {
 module nano_mount(h=5) {
 	// Mount parameters
 	Mnt_H = h + T + 1;
-	Mnt_L = L + Mnt_Lip/2;
+	Mnt_L = L + Mnt_RearLip*0.4;
 	Mnt_W = W;
 
   difference() {
@@ -63,8 +65,8 @@ module nano_mount(h=5) {
       cube([L+2*Slop, W+2*Slop, T+2*Slop]);
     
     // Remove section above PCB
-    translate([Mnt_Lip, Mnt_T/2-Slop, h])
-      cube([Mnt_L-2*Mnt_Lip+Slop, W+2*Slop, 3*T]);;
+    translate([Mnt_FrontLip, Mnt_T/2-Slop, h])
+      cube([Mnt_L-Mnt_FrontLip-Mnt_RearLip+Slop, W+2*Slop, 3*T]);;
     
     // Remove any overhang
     translate([-10, -1, -1])
