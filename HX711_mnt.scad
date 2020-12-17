@@ -1,4 +1,4 @@
-// hx711.scad - HX711 Mount in OpenSCAD
+// hx711_mnt.scad - HX711 Mount in OpenSCAD
 
 include <BOSL/constants.scad>
 use <BOSL/shapes.scad>
