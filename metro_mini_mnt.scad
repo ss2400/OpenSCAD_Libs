@@ -1,4 +1,4 @@
-// MetroMini_mnt.scad - Adafruit metro mini Mount in OpenSCAD
+// metro_mini_mnt.scad - Adafruit metro mini Mount in OpenSCAD
 $fn=100;
 
 Height = 5;     // Bottom of PCB
