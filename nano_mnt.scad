@@ -1,4 +1,4 @@
-// Nano_mnt.scad - Arduino Nano Mount in OpenSCAD
+// nano_mnt.scad - Arduino Nano Mount in OpenSCAD
 
 include <BOSL/constants.scad>
 use <BOSL/shapes.scad>
