@@ -1,4 +1,4 @@
-// oled_096.scad - OLED 0.96" screen in OpenSCAD
+// 096_oled_mnt.scad - OLED 0.96" screen in OpenSCAD
 $fn = 36;
 
 include <OpenSCAD_Libs/models/096OledDim.scad>; // OLED screen dimensions
