@@ -1,34 +1,40 @@
 // hx711.scad - HX711 Mount in OpenSCAD
+
+include <BOSL/constants.scad>
+use <BOSL/shapes.scad>
+include <Round-Anything/MinkowskiRound.scad>
+
 $fn=100;
 
-Slop = 0.1;     // Fitment slop
-
-// PCB parameters
+// PCB dimensions
 L = 33.6;       // PCB Length
 W = 20.5;       // PCB Width
 T = 1.6;        // PCB Thickness
 Hole = 3;       // Hole size
-Offset1 = 4.4;  // Hole offset from edge
-Offset2 = 2.4;  // Hole offset from edge
+OffsetL = 4.5;  // Hole offset from edge
+OffsetW = 3.0;  // Hole offset from edge
 
-Mnt_T = 2; 
-Mnt_Lip = 3;
-    
+Mnt_T = 5;      // Mount thickness
+Screw = 2.5;      // Screw size
+Slop = 0.1;     // Fitment slop
+
 // Examples
-hx711(h);
+hx711(h=5);
 hx711_mount(h=5);
-
+translate([-4,-4,0])
+  cube([40,28,2]);
+  
 module hx711(h=5, center=false) {
-  translate([0, Mnt_T/2, 0]) {
+  translate([0, 0, 0]) {
     difference() {
       // PCB
       translate([0, 0, h])
         %cube([L, W, T]);
 
-      // Holes
-      translate([L-Offset1, W-Offset2, h+T/2])
+      // Posts
+      translate([L-OffsetL, OffsetW, h+T/2])
         %cylinder(h = 2*T, d = Hole, center = true);
-      translate([L-Offset1, Offset2, h+T/2])
+      translate([L-OffsetL, W-OffsetW, h+T/2])
         %cylinder(h = 2*T, d = Hole, center = true);
     }
   }
@@ -36,30 +42,31 @@ module hx711(h=5, center=false) {
 
 module hx711_mount(h=5, center=false) {
   // Mount parameters
-  Mnt_H = h + T + 1;
-  Mnt_L = L + Mnt_Lip/2;
+  Mnt_H =  h + T*2;
   Mnt_W = W;
+  Mnt_L = L - OffsetL;
 
   difference() {
     union() {
-    // Create 1st side
-    translate([0, Mnt_W, 0])
-      cube([Mnt_L, Mnt_T, Mnt_H]);
-    // Create 2nd side  
+    // Create front
     translate([0, 0, 0])
-      cube([Mnt_L, Mnt_T, Mnt_H]);
+      cylinder(h=Mnt_H, d = Mnt_T);
+    translate([0, Mnt_W, 0])
+      cylinder(h=Mnt_H, d = Mnt_T);
+      
+    // Create rear  
+    translate([Mnt_L, OffsetW, 0])
+      tube(h=h+T, id=Screw, od=Screw*3);
+    translate([Mnt_L, Mnt_W-OffsetW, 0])
+      tube(h=h+T, id=Screw, od=Screw*3);
     }
     
-    // Remove PCB slot
-    translate([-Slop, Mnt_T/2-Slop, h-Slop])
-      cube([L+2*Slop, W+2*Slop, T+2*Slop]);
-    
-    // Remove section above PCB
-    translate([Mnt_Lip, Mnt_T/2-Slop, h])
-      cube([Mnt_L-2*Mnt_Lip+Slop, W+2*Slop, 3*T]);;
-    
-    // Remove any overhang
-    translate([-10, -1, -1])
-      cube([10, Mnt_W+Mnt_T+2, Mnt_H+2]);
+    // Remove PCB
+    translate([-Slop, -Slop, h])
+      cube([L, Mnt_W+Slop*2, T+Slop]);
+      
+    // Remove section from posts
+    translate([L-OffsetL, Mnt_W/2, 0])
+      cube([Mnt_L/2, Mnt_W-Screw*4, Mnt_H*2], center = true);    
   }
 }

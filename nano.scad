@@ -4,7 +4,7 @@ include <BOSL/constants.scad>
 use <BOSL/shapes.scad>
 include <Round-Anything/MinkowskiRound.scad>
 
-$fn=20;
+$fn=100;
 
 // PCB dimensions
 L = 43.18;      // PCB Length
@@ -13,17 +13,18 @@ T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
-Mnt_T = 2.2;    // Mount thickness
+Mnt_T = 5;      // Mount thickness
 Screw = 2;      // Screw size
 Slop = 0.15;    // Fitments slop
 
 // Examples
 nano(h=10);
 nano_mount(h=10);
-cube([50,22,3]);
+translate([-4,-4,0])
+  cube([54,26,2]);
 
 module nano(h=5) {
-  translate([Mnt_T/2, Mnt_T, 0]) {
+  translate([0, 0, 0]) {
   
     translate([3, W/2, h+T+2])
       rotate([0,180,270])
@@ -49,33 +50,31 @@ module nano(h=5) {
 
 module nano_mount(h=5) {
 	// Mount parameters
-	Mnt_H = h + T + 1;
-	Mnt_L = L + 2;
+	Mnt_H = h + T*2;
+	Mnt_L = L;
 	Mnt_W = W;
 
   difference() {
     union() {
       // Create front
       translate([0, 0, 0])
-        cube([Mnt_T, Mnt_W+Mnt_T*2, Mnt_H]);
-
-      //minkowskiRound(2,2,1,[10,10,10])
-        //union() {
-          // Create rear
-          translate([L-Mnt_T/2, 0, 0])
-            cube([Mnt_T, Mnt_W+Mnt_T*2, h+T]);
-       
-          // Screw post
-          translate([L+Mnt_T+Slop, W/2+Mnt_T, 0])
-            tube(h=h+T, id=Screw, od=Screw*3);
-        //}
+        cylinder(h=Mnt_H, d = Mnt_T);
+      translate([0, Mnt_W, 0])
+        cylinder(h=Mnt_H, d = Mnt_T);
+        
+      // Create rear
+      translate([Mnt_L, 0, 0])
+        cylinder(h=h+T, d = Mnt_T);
+      translate([Mnt_L, Mnt_W, 0])
+        cylinder(h=h+T, d = Mnt_T);
+        
+      // Screw post
+      translate([Mnt_L+Screw/2+Slop, Mnt_W/2, 0])
+        tube(h=h+T, id=Screw, od=Screw*3);
     }
-    // Remove USB slot
-    translate([-0.01, Mnt_T+Mnt_W*0.25, h])
-      cube([Mnt_T*2, W*0.5, T*2]);
     
     // Remove PCB section
-    translate([Mnt_T/2-Slop, Mnt_T-Slop, h])
-      cube([L+Mnt_T*4, Mnt_W+Slop*2, T+Slop]);;
+    translate([Slop, -Slop, h])
+      cube([Mnt_L+Slop*2, Mnt_W+Slop*2, T+Slop]);;
   }  
 }
