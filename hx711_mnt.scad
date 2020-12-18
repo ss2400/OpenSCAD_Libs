@@ -1,8 +1,6 @@
 // hx711_mnt.scad - HX711 Mount in OpenSCAD
 
-include <BOSL/constants.scad>
-use <BOSL/shapes.scad>
-include <Round-Anything/MinkowskiRound.scad>
+include <NopSCADlib/lib.scad>
 
 $fn=100;
 
@@ -13,9 +11,10 @@ T = 1.6;        // PCB Thickness
 Hole = 3;       // Hole size
 OffsetL = 4.5;  // Hole offset from edge
 OffsetW = 3.0;  // Hole offset from edge
+Keepout = 10;   // Connector keep out
 
-Mnt_T = 5;      // Mount thickness
-Screw = 2.5;      // Screw size
+Post = 5;       // Post thickness (except with screw)
+Screw = 2.0;    // Screw size
 Slop = 0.1;     // Fitment slop
 
 // Examples
@@ -31,7 +30,7 @@ module hx711(h=5, center=false) {
       translate([0, 0, h])
         %cube([L, W, T]);
 
-      // Posts
+      // Holes
       translate([L-OffsetL, OffsetW, h+T/2])
         %cylinder(h = 2*T, d = Hole, center = true);
       translate([L-OffsetL, W-OffsetW, h+T/2])
@@ -50,15 +49,15 @@ module hx711_mount(h=5, center=false) {
     union() {
     // Create front
     translate([0, 0, 0])
-      cylinder(h=Mnt_H, d = Mnt_T);
+      rounded_cylinder(r=Post/2, h=Mnt_H, r2=0.5, ir=0, angle=360);
     translate([0, Mnt_W, 0])
-      cylinder(h=Mnt_H, d = Mnt_T);
+      rounded_cylinder(r=Post/2, h=Mnt_H, r2=0.5, ir=0, angle=360);
       
     // Create rear  
     translate([Mnt_L, OffsetW, 0])
-      tube(h=h+T, id=Screw, od=Screw*3);
+      rounded_cylinder(r=Screw+1, h=h+T, r2=0.5, ir=Screw/2, angle=360);
     translate([Mnt_L, Mnt_W-OffsetW, 0])
-      tube(h=h+T, id=Screw, od=Screw*3);
+      rounded_cylinder(r=Screw+1, h=h+T, r2=0.5, ir=Screw/2, angle=360);
     }
     
     // Remove PCB
@@ -67,6 +66,6 @@ module hx711_mount(h=5, center=false) {
       
     // Remove section from posts
     translate([L-OffsetL, Mnt_W/2, 0])
-      cube([Mnt_L/2, Mnt_W-Screw*4, Mnt_H*2], center = true);    
+      cube([Mnt_L/2, Keepout, Mnt_H*2], center = true);    
   }
 }

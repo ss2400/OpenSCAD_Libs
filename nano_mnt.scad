@@ -1,8 +1,6 @@
 // nano_mnt.scad - Arduino Nano Mount in OpenSCAD
 
-include <BOSL/constants.scad>
-use <BOSL/shapes.scad>
-include <Round-Anything/MinkowskiRound.scad>
+include <NopSCADlib/lib.scad>
 
 $fn=100;
 
@@ -13,7 +11,7 @@ T = 1.6;        // PCB Thickness
 Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
-Mnt_T = 5;      // Mount thickness
+Post = 5;       // Post thickness (except with screw)
 Screw = 2;      // Screw size
 Slop = 0.15;    // Fitments slop
 
@@ -58,19 +56,19 @@ module nano_mount(h=5) {
     union() {
       // Create front
       translate([0, 0, 0])
-        cylinder(h=Mnt_H, d = Mnt_T);
+        rounded_cylinder(r=Post/2, h=Mnt_H, r2=0.5, ir=0, angle=360);
       translate([0, Mnt_W, 0])
-        cylinder(h=Mnt_H, d = Mnt_T);
+        rounded_cylinder(r=Post/2, h=Mnt_H, r2=0.5, ir=0, angle=360);
         
       // Create rear
       translate([Mnt_L, 0, 0])
-        cylinder(h=h+T, d = Mnt_T);
+        rounded_cylinder(r=Post/2, h=h+T, r2=0.5, ir=0, angle=360);
       translate([Mnt_L, Mnt_W, 0])
-        cylinder(h=h+T, d = Mnt_T);
+        rounded_cylinder(r=Post/2, h=h+T, r2=0.5, ir=0, angle=360);
         
       // Screw post
       translate([Mnt_L+Screw/2+Slop, Mnt_W/2, 0])
-        tube(h=h+T, id=Screw, od=Screw*3);
+        rounded_cylinder(r=Screw+1, h=h+T, r2=0.5, ir=Screw/2, angle=360);
     }
     
     // Remove PCB section
