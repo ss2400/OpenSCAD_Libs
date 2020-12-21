@@ -16,33 +16,32 @@ Screw = 2;      // Screw size
 Slop = 0.15;    // Fitments slop
 
 // Examples
-nano(h=10);
-nano_mount(h=10);
+translate([0,0,2-0.01]) {
+  nano(h=10);
+  nano_mount(h=10);
+  }
 translate([-4,-4,0])
   cube([54,26,2]);
 
 module nano(h=5) {
-  translate([0, 0, 0]) {
+  translate([3, W/2, h+T+2])
+    rotate([0,180,270])
+      %import("models/587.stl", convexity=4);
   
-    translate([3, W/2, h+T+2])
-      rotate([0,180,270])
-        %import("models/587.stl", convexity=4);
-  
-    difference() {
-      // PCB
-      translate([0, 0, h])
-        %cube([L, W, T]);
+  difference() {
+    // PCB
+    translate([0, 0, h])
+      %cube([L, W, T]);
 
-      // Holes
-      translate([L-Offset, W-Offset, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true);
-      translate([L-Offset, Offset, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true);
-      translate([Offset, W-Offset, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true); 
-      translate([Offset, Offset, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true); 
-    }
+    // Holes
+    translate([L-Offset, W-Offset, h+T/2])
+      %cylinder(h = 2*T, d = Hole, center = true);
+    translate([L-Offset, Offset, h+T/2])
+      %cylinder(h = 2*T, d = Hole, center = true);
+    translate([Offset, W-Offset, h+T/2])
+      %cylinder(h = 2*T, d = Hole, center = true); 
+    translate([Offset, Offset, h+T/2])
+      %cylinder(h = 2*T, d = Hole, center = true); 
   }
 }
 
