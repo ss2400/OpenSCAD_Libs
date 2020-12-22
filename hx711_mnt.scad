@@ -14,7 +14,7 @@ OffsetW = 3.0;  // Hole offset from edge
 Keepout = 10;   // Connector keep out
 
 Post = 5;       // Post thickness (except with screw)
-Screw = 2.0;    // Screw size
+Screw = 1.95;   // Screw hole size
 Slop = 0.1;     // Fitment slop
 
 // Examples

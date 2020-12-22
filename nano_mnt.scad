@@ -12,7 +12,7 @@ Hole = 1.77;    // Hole size
 Offset = 1.27;  // Hole offset from edge
 
 Post = 5;       // Post thickness (except with screw)
-Screw = 2;      // Screw size
+Screw = 1.95;   // Screw hole size
 Slop = 0.15;    // Fitments slop
 
 // Examples
