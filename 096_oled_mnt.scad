@@ -7,56 +7,55 @@ use <OpenSCAD_Libs/models/096Oled.scad>; // OLED screen model
 post_slop = 0.6;  // Additional tolerance for posts
 glass_slop = 1.0; // Additional tolerance for glass
 
-// OLED cutout for difference
-module oled_cutout() {
+// Examples
+face = 2.4; // Face plate thickness
+oled_mount(type=DORHEA)
+  translate([-20,-20,0])
+    cube([40,40,face], center=false);
+DisplayModule(type=DORHEA, align=1, G_COLORS=true);
+
+// OLED cutout
+module oled_cutout(type=undef) {
   translate([0,0,-0.1]) {
     union() {
       // Cutout volume over the view area
-      DisplayLocalize(type=I2C4, align=0, dalign=1)
+      DisplayLocalize(type=type, align=0, dalign=1)
         translate([0,0,6.0/2])
-          cube([I2C4_LVW,I2C4_LVL,6.0], center=true);
+          cube([OLED[type][3][0],OLED[type][3][1],6.0], center=true);
 
       // Over the module glass... (Increased by slop)
-      DisplayLocalize(type=I2C4, align=1, dalign=2)
-        translate([0,0,(I2C4_LH+0.1)/2])
-          cube([I2C4_LGW+glass_slop, I2C4_LGL+glass_slop, I2C4_LH], center=true);
+      DisplayLocalize(type=type, align=1, dalign=2)
+        translate([0,0,(OLED[type][0][2]+0.1)/2])
+          cube([OLED[type][0][0]+glass_slop, OLED[type][0][1]+glass_slop, OLED[type][0][2]], center=true);
 
       // Internal flat cable
-      DisplayLocalize(type=I2C4, align=4, dalign=1)
-        translate([0,0,I2C4_LH/2])
-          cube([I2C4_PCW,I2C4_PL-I2C4_LGL-I2C4_LGLO,I2C4_LH], center=true);
+      DisplayLocalize(type=type, align=4, dalign=1)
+        translate([0,0,OLED[type][0][2]/2])
+          cube([PCB[type][2][0],PCB[type][0][1]-OLED[type][0][1]-OLED[type][2],OLED[type][0][2]], center=true);
 
       // Connector cutout (glass side)
-      DisplayLocalize(type=I2C4, align=2, dalign=1)
-        translate([0, I2C4_PL/2-I2C4_CYO, I2C4_SSH/2])
-          cube([I2C4_CFW, I2C4_CFL, I2C4_SSH], center=true);
+      DisplayLocalize(type=type, align=2, dalign=1)
+        translate([0, PCB[type][0][1]/2-BS[type][2], BS[type][1]/2])
+          cube([BS[type][0][0], BS[type][0][1], BS[type][1]], center=true);
     }
   }
 }
 
-// Posts (Reduced by slop)
-module oled_posts() {
-  for (i=[0:1:len(HOLES[I2C4])-1])
+// OLED mounting posts (Reduced by slop)
+module oled_posts(type=undef) {
+  for (i=[0:1:len(HOLES[type])-1])
     hull() {
-      for (j=[0:1:len(HOLES[I2C4][i])-1])
-        translate([HOLES[I2C4][i][j][1][0], HOLES[I2C4][i][j][1][1], -0.4])
-          cylinder(d=HOLES[I2C4][i][j][0]-post_slop, h=PCB[I2C4][0][2]+2, center=true);
+      for (j=[0:1:len(HOLES[type][i])-1])
+        translate([HOLES[type][i][j][1][0], HOLES[type][i][j][1][1], -0.4])
+          cylinder(d=HOLES[type][i][j][0]-post_slop, h=PCB[type][0][2]+2, center=true);
     }
 }
 
-// Examples
-face = 2.4; // Face plate thickness
-
-difference() {
-  // Faceplate
-  translate([-20,-20,0])
-    cube([40,40,face], center=false);
-  
-  // Cutout
-  oled_cutout();
+// Processing module
+module oled_mount(type=undef) {
+  difference() {
+    children();
+    oled_cutout(type=type);
+  }
+  oled_posts(type=type);
 }
-// Posts
-oled_posts();
-
-// --- I2C4 ---
-//DisplayModule(type=I2C4, align=1, G_COLORS=true);

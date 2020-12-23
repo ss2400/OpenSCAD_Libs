@@ -13,7 +13,7 @@ Offset = 1.27;  // Hole offset from edge
 
 Post = 5;       // Post thickness (except with screw)
 Screw = 1.95;   // Screw hole size
-Slop = 0.15;    // Fitments slop
+Slop = 0.18;    // Fitments slop
 
 // Examples
 translate([0,0,2-0.01]) {
@@ -24,30 +24,33 @@ translate([-4,-4,0])
   cube([54,26,2]);
 
 module nano(h=5) {
-  translate([3, W/2, h+T+2])
+  // USB mini connector
+  translate([3, W/2, h+T+2+0.01])
     rotate([0,180,270])
-      %import("models/587.stl", convexity=4);
+      color("Silver")
+        import("models/587.stl", convexity=4);
   
   difference() {
     // PCB
-    translate([0, 0, h])
-      %cube([L, W, T]);
+    translate([Slop, 0, h+0.01])
+      color("SteelBlue")
+        cube([L, W, T]);
 
     // Holes
     translate([L-Offset, W-Offset, h+T/2])
-      %cylinder(h = 2*T, d = Hole, center = true);
+      cylinder(h = 2*T, d = Hole, center = true);
     translate([L-Offset, Offset, h+T/2])
-      %cylinder(h = 2*T, d = Hole, center = true);
+      cylinder(h = 2*T, d = Hole, center = true);
     translate([Offset, W-Offset, h+T/2])
-      %cylinder(h = 2*T, d = Hole, center = true); 
+      cylinder(h = 2*T, d = Hole, center = true); 
     translate([Offset, Offset, h+T/2])
-      %cylinder(h = 2*T, d = Hole, center = true); 
+      cylinder(h = 2*T, d = Hole, center = true); 
   }
 }
 
 module nano_mount(h=5) {
 	// Mount parameters
-	Mnt_H = h + T*2;
+	Mnt_H = h + T*2.5;
 	Mnt_L = L;
 	Mnt_W = W;
 
@@ -72,6 +75,6 @@ module nano_mount(h=5) {
     
     // Remove PCB section
     translate([Slop, -Slop, h])
-      cube([Mnt_L+Slop*2, Mnt_W+Slop*2, T+Slop]);;
+      cube([Mnt_L+Slop*2, Mnt_W+Slop*2, T+Slop*2]);;
   }  
 }

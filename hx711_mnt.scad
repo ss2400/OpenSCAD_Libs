@@ -15,7 +15,7 @@ Keepout = 10;   // Connector keep out
 
 Post = 5;       // Post thickness (except with screw)
 Screw = 1.95;   // Screw hole size
-Slop = 0.1;     // Fitment slop
+Slop = 0.18;    // Fitment slop
 
 // Examples
 hx711(h=5);
@@ -23,25 +23,28 @@ hx711_mount(h=5);
 translate([-4,-4,0])
   cube([40,28,2]);
   
+// HX711 model
 module hx711(h=5, center=false) {
-  translate([0, 0, 0]) {
+  translate([0, 0, 0.01]) {
     difference() {
       // PCB
       translate([0, 0, h])
-        %cube([L, W, T]);
+        color("ForestGreen")
+          cube([L, W, T]);
 
       // Holes
       translate([L-OffsetL, OffsetW, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true);
+        cylinder(h = 2*T, d = Hole, center = true);
       translate([L-OffsetL, W-OffsetW, h+T/2])
-        %cylinder(h = 2*T, d = Hole, center = true);
+        cylinder(h = 2*T, d = Hole, center = true);
     }
   }
 }
 
+// HX711 posts
 module hx711_mount(h=5, center=false) {
   // Mount parameters
-  Mnt_H =  h + T*2;
+  Mnt_H =  h + T*2.5;
   Mnt_W = W;
   Mnt_L = L - OffsetL;
 
@@ -62,7 +65,7 @@ module hx711_mount(h=5, center=false) {
     
     // Remove PCB
     translate([-Slop, -Slop, h])
-      cube([L, Mnt_W+Slop*2, T+Slop]);
+      cube([L, Mnt_W+Slop*2, T+Slop*2]);
       
     // Remove section from posts
     translate([L-OffsetL, Mnt_W/2, 0])
