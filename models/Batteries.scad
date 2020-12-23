@@ -34,20 +34,19 @@ module 9V() {
   translate ([2,2,0]) {
     union(){
       translate(v = [(26.5-2*r)/2-12.95/2, (17.5-2*r)/2, 46.4]) {
-        cylinder(h = 48.5-46.4, r=3);
+        color("Silver") cylinder(h = 48.5-46.4, r=3);
       }
 
       translate(v = [(26.5-2*r)/2+12.95/2, (17.5-2*r)/2, 46.4]) {
         for ( i = [0:3])
           { rotate ( i * 60, [0,0,1])
-            cube([7.79,4.5,(48.5-46.4)*2],center = true);
+            color("Silver") cube([7.79,4.5,(48.5-46.4)*2],center = true);
           }
-		
       }
 
-      minkowski() {
-      cube([26.5-2*r,17.5-2*r,46.4/2]);
-      cylinder(r=r,h=46.4/2);
+      color("Tan") minkowski() {
+        cube([26.5-2*r,17.5-2*r,46.4/2]);
+        cylinder(r=r,h=46.4/2);
       }
     }
   }
@@ -58,7 +57,7 @@ module 45V() {
   w=22;
   l=62;
 
-  minkowski() {
+  color("Tan") minkowski() {
     cube([l-w/2,0.1,h/2]);
     cylinder(r=w/2,h=h/2);
   }
@@ -67,9 +66,9 @@ module 45V() {
 
 module battery_round(h, dia, h_con, dia_con) {
   union() {
-    cylinder(h = h-h_con, r=dia/2);
+    color("Tan") cylinder(h = h-h_con, r=dia/2);
     translate(v = [0, 0, h-h_con]) {
-      cylinder(h = h_con, r=dia_con/2);
+      color("Silver") cylinder(h = h_con, r=dia_con/2);
     }
   }
 }

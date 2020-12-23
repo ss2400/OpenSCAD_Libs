@@ -5,6 +5,7 @@
 CRIUS = 0;      // CRIUS display
 I2CSPI7 = 1;    // I2C/SPI 7 pins display
 I2C4 = 2;       // I2C 4 pins display
+DORHEA = 3;     // I2C 4 pins display made by DORHEA
 
 /*
 If you want to use the OLED model 'genderless' dimensions in your
@@ -160,7 +161,7 @@ I2CSPI7_COLORS = [
 
 // --- I2C 4 pins display ---
 // PCB
-I2C4_PW = 27.4; //27.0      // PCB width (X)
+I2C4_PW = 27.0;             // PCB width (X)
 I2C4_PL = 27.9;             // PCB length (Y)
 I2C4_PH = 1.0;              // PCB height (without components) (Z)
 I2C4_PCW = 15.1;            // PCB Y cutout window(s) width
@@ -169,12 +170,12 @@ I2C4_PCOR = 1.0;            // PCB corner radius
 // OLED
 I2C4_LH = 1.8;              // OLED glass height (Z)
 I2C4_LGW = I2C4_PW;         // OLED glass width (X)
-I2C4_LGL = 19.4; // 19.2    // OLED glass length (Y)
+I2C4_LGL = 19.2;            // OLED glass length (Y)
 I2C4_LGLO = 4.0;            // OLED glass length offset (-Y) /top
 I2C4_LDW = I2C4_LGW;        // OLED display zone width (X)
-I2C4_LDL = 15.7; //14.8     // OLED display zone length (Y)
-I2C4_LVW = 22.8; // 21.8    // OLED view area width (X)    
-I2C4_LVL = 12.6; // 11.4    // OLED view area length (Y)
+I2C4_LDL = 14.8;            // OLED display zone length (Y)
+I2C4_LVW = 21.8;            // OLED view area width (X)    
+I2C4_LVL = 11.4;            // OLED view area length (Y)
 // Bottom side components
 I2C4_CFW = 10.2;            // Connector Width (X)
 I2C4_CFL = 2.54;            // Connector Length (Y)
@@ -198,28 +199,7 @@ I2C4_TXT_VALIGN = [
 I2C4_HOLES = [
 //           [Dia, [Pos X,  Pos Y (from PCB center)], ...]
 //           Grouped by a 'hull' function
-        // Top Left
-        [
-            [2.2, [ -11.7, 12.0]],
-            [2.2, [ -11.7, 12.0]],
-        ],
-        // Top Right
-        [
-            [2.2, [ 11.7, 12.0]],
-            [2.2, [ 11.7, 12.0]],
-        ],
-        // Bottom Left
-        [
-            [2.2, [ -11.7, -12.0]],
-            [2.2, [ -11.7, -12.0]],
-        ],
-        // Bottom Right
-        [
-            [2.2, [ 11.7, -12.0]],
-            [2.2, [ 11.7, -12.0]],
-        ]
-    ];
-/*
+
         // Top Left
         [
             [2.2, [ -10.4, 11.6]],
@@ -241,9 +221,80 @@ I2C4_HOLES = [
             [2.2, [ 9.4, -11.6]],
         ]
     ];
-*/
+
 // Colors
 I2C4_COLORS = [
+            "SteelBlue",    // 0: PCB
+            "DimGray",      // 1: LCD base
+            "DarkSlateGray",// 2: Display window
+            "DarkMagenta",  // 3: Viewarea
+            "Gray"          // 4: Connector
+         ];
+
+// --- I2C 4 pins display made by DORHEA ---
+// PCB
+DORHEA_PW = 27.4;             // PCB width (X)
+DORHEA_PL = 27.9;             // PCB length (Y)
+DORHEA_PH = 1.0;              // PCB height (without components) (Z)
+DORHEA_PCW = 15.1;            // PCB Y cutout window(s) width
+DORHEA_PCL = 1.4;             // PCB Y cutout window(s) length
+DORHEA_PCOR = 1.0;            // PCB corner radius
+// OLED
+DORHEA_LH = 1.8;              // OLED glass height (Z)
+DORHEA_LGW = DORHEA_PW;       // OLED glass width (X)
+DORHEA_LGL = 19.4;            // OLED glass length (Y)
+DORHEA_LGLO = 4.0;            // OLED glass length offset (-Y) /top
+DORHEA_LDW = DORHEA_LGW;      // OLED display zone width (X)
+DORHEA_LDL = 15.7;            // OLED display zone length (Y)
+DORHEA_LVW = 22.8;            // OLED view area width (X)    
+DORHEA_LVL = 12.6;            // OLED view area length (Y)
+// Bottom side components
+DORHEA_CFW = 10.2;            // Connector Width (X)
+DORHEA_CFL = 2.54;            // Connector Length (Y)
+DORHEA_CFH = 8.4;             // Connector Height (Z)
+DORHEA_CYO = 0.4 + DORHEA_CFL/2;// Connector Y offset (from PCB Y+ border / top)
+DORHEA_SSH = 2.0;             // Solder side (glass side) height
+// Text (top side)
+DORHEA_TXT = [
+            ];
+DORHEA_TXT_POS = [
+            ];
+DORHEA_TXT_FONT = [
+            ];
+DORHEA_TXT_SIZ = [
+            ];
+DORHEA_TXT_HALIGN = [
+            ];
+DORHEA_TXT_VALIGN = [
+            ];
+// Holes
+DORHEA_HOLES = [
+//           [Dia, [Pos X,  Pos Y (from PCB center)], ...]
+//           Grouped by a 'hull' function
+        // Top Left
+        [
+            [2.2, [ -11.7, 12.0]],
+            [2.2, [ -11.7, 12.0]],
+        ],
+        // Top Right
+        [
+            [2.2, [ 11.7, 12.0]],
+            [2.2, [ 11.7, 12.0]],
+        ],
+        // Bottom Left
+        [
+            [2.2, [ -11.7, -12.0]],
+            [2.2, [ -11.7, -12.0]],
+        ],
+        // Bottom Right
+        [
+            [2.2, [ 11.7, -12.0]],
+            [2.2, [ 11.7, -12.0]],
+        ]
+    ];
+
+// Colors
+DORHEA_COLORS = [
             "SteelBlue",    // 0: PCB
             "DimGray",      // 1: LCD base
             "DarkSlateGray",// 2: Display window
@@ -276,6 +327,13 @@ PCB = [
             0,  // 0=No cutouts, 1=Y- cutout, 2=Y+ and Y- cutout
             [I2C4_PCW, I2C4_PCL],
             I2C4_PCOR
+        ],
+        // DORHEA
+        [
+            [ DORHEA_PW, DORHEA_PL, DORHEA_PH ],
+            0,  // 0=No cutouts, 1=Y- cutout, 2=Y+ and Y- cutout
+            [DORHEA_PCW, DORHEA_PCL],
+            DORHEA_PCOR
         ]
       ];
 
@@ -300,6 +358,13 @@ OLED = [
             [ I2C4_LDW, I2C4_LDL ],
             I2C4_LGLO,
             [ I2C4_LVW, I2C4_LVL ]
+        ],
+        // DORHEA
+        [
+            [ DORHEA_LGW, DORHEA_LGL, DORHEA_LH ],
+            [ DORHEA_LDW, DORHEA_LDL ],
+            DORHEA_LGLO,
+            [ DORHEA_LVW, DORHEA_LVL ]
         ]
        ];
 BS = [
@@ -320,6 +385,12 @@ BS = [
             [I2C4_CFW, I2C4_CFL, I2C4_CFH ],
             I2C4_SSH,
             I2C4_CYO
+        ],
+        // DORHEA
+        [
+            [DORHEA_CFW, DORHEA_CFL, DORHEA_CFH ],
+            DORHEA_SSH,
+            DORHEA_CYO
         ]
      ];
 TEXTS = [
@@ -349,6 +420,15 @@ TEXTS = [
                 I2C4_TXT_SIZ,
                 I2C4_TXT_HALIGN,
                 I2C4_TXT_VALIGN
+            ],
+            // DORHEA
+            [
+                DORHEA_TXT,
+                DORHEA_TXT_POS,
+                DORHEA_TXT_FONT,
+                DORHEA_TXT_SIZ,
+                DORHEA_TXT_HALIGN,
+                DORHEA_TXT_VALIGN
             ]
         ];
 COLORS = [
@@ -357,7 +437,9 @@ COLORS = [
             // I2CSPI7
             I2CSPI7_COLORS,
             // I2C4
-            I2C4_COLORS
+            I2C4_COLORS,
+            // DORHEA
+            DORHEA_COLORS
          ];
 HOLES = [
             // CRIUS
@@ -365,5 +447,7 @@ HOLES = [
             // I2CSPI7
             I2CSPI7_HOLES,
             // I2C4
-            I2C4_HOLES
+            I2C4_HOLES,
+            // DORHEA
+            DORHEA_HOLES
         ];
