@@ -1,38 +1,27 @@
-// 2000kg_scale.scad - 2000kg_scale in OpenSCAD
-//
-/////////////////////////// - Info - //////////////////////////////
-// All coordinates are starting as integrated circuit pins.
-// From the top view :
-//   CoordD           <---       CoordC
-//                                 ^
-//                                 ^
-//                                 ^
-//   CoordA           --->       CoordB
-////////////////////////////////////////////////////////////////////
+// mbox.scad - Custom box in OpenSCAD
 
 include <NopSCADlib/core.scad>
 
 Color1 = "BurlyWood";
 Color2 = "SlateGray";
 
-function mbox(name, panel_t, shell_t, vent, vent_w, filet, tolerance, size)
-    = concat([name, panel_t, shell_t, vent, vent_w, filet, tolerance], size);
+function mbox(name, thick, vent, vent_w, filet, tolerance, size)
+    = concat([name, thick, vent, vent_w, filet, tolerance], size);
 
 function mbox_name(type)       = type[0]; //! Name to allow more than one box in a project
-function mbox_panel(type)      = type[1]; //! Panel thickness
-function mbox_shell(type)      = type[2]; //! Shell thickness
-function mbox_vent(type)       = type[3]; //! Decorations to ventilation holes [0:No, 1:Yes]
-function mbox_ventW(type)      = type[4]; //! Holes width (in mm)  
-function mbox_filet(type)      = type[5]; //! Filet diameter
-function mbox_tolerance(type)  = type[6]; //! Internal corner radius
-function mbox_length(type)     = type[7]; //! Box length
-function mbox_width(type)      = type[8]; //! Box width
-function mbox_height(type)     = type[9]; //! Box height
+function mbox_thick(type)      = type[1]; //! Panel thickness
+function mbox_vent(type)       = type[2]; //! Decorations to ventilation holes [0:No, 1:Yes]
+function mbox_ventW(type)      = type[3]; //! Holes width (in mm)  
+function mbox_filet(type)      = type[4]; //! Filet diameter
+function mbox_tolerance(type)  = type[5]; //! Internal corner radius
+function mbox_length(type)     = type[6]; //! Box length
+function mbox_width(type)      = type[7]; //! Box width
+function mbox_height(type)     = type[8]; //! Box height
 
 // Round box
 module RoundBox($a=undef, $b=undef, $c=undef, type) {
-  Filet = mbox_filet(type);
   Length = mbox_length(type);
+  Filet = mbox_filet(type);
   $fn=50;
   
   translate([0,Filet,Filet]){  
@@ -47,7 +36,7 @@ module RoundBox($a=undef, $b=undef, $c=undef, type) {
       
 // Shell
 module mbox_shell(type) {
-  Thick = mbox_shell(type)*2;
+  Thick = mbox_thick(type)*2;
   Length = mbox_length(type);
   Width = mbox_width(type);
   Height = mbox_height(type);
@@ -170,20 +159,22 @@ module mbox_shell(type) {
 
 // Panels
 module mbox_panels(type){
-  Thick = mbox_panel(type)*2;
+  Thick = mbox_thick(type);
   Length = mbox_length(type);
   Width = mbox_width(type);
   Height = mbox_height(type);
   m = mbox_tolerance(type);
   
-  color(Color2)
-    translate([Thick+m,m/2,m/2])
+  color(Color2){
+    translate([Thick+m,m/2,m/2]){
       difference(){
-        translate([0,Thick,Thick])
-          RoundBox(Length,Width-((Thick*2)+m),Height-((Thick*2)+m), type=type);
-        translate([Thick,-5,0])
-          cube([Length,Width+10,Height]);
+        translate([0,Thick,Thick]){
+          RoundBox(Length,Width-((Thick*2)+m),Height-((Thick*2)+m), type=type);}
+        translate([Thick,-5,0]){
+          cube([Length,Width+10,Height]);}
       }
+    }
+  }
 }
 
 // Back Panel
