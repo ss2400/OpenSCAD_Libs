@@ -1,9 +1,7 @@
 // mbox.scad - Custom box in OpenSCAD
 
+include <NopSCADlib/lib.scad>
 include <NopSCADlib/core.scad>
-
-Color1 = "BurlyWood";
-Color2 = "SlateGray";
 
 function mbox(name, thick, vent, vent_w, filet, tolerance, size)
     = concat([name, thick, vent, vent_w, filet, tolerance], size);
@@ -55,7 +53,7 @@ module mbox_shell(type) {
     
           difference(){// Median cube slicer
             union() {// Union               
-              difference(){//S hell    
+              difference(){// Shell    
                 RoundBox($a=Length, $b=Width, $c=Height, type=type);
                 translate([Thick/2,Thick/2,Thick/2]){     
                   RoundBox($a=Length-Thick, $b=Width-Thick, $c=Height-Thick, type=type);
@@ -164,15 +162,13 @@ module mbox_panels(type){
   Width = mbox_width(type);
   Height = mbox_height(type);
   m = mbox_tolerance(type);
-  
-  color(Color2){
-    translate([Thick+m,m/2,m/2]){
-      difference(){
-        translate([0,Thick,Thick]){
-          RoundBox(Length,Width-((Thick*2)+m),Height-((Thick*2)+m), type=type);}
-        translate([Thick,-5,0]){
-          cube([Length,Width+10,Height]);}
-      }
+
+  translate([Thick+m,m/2,m/2]){
+    difference(){
+      translate([0,Thick,Thick]){
+        RoundBox(Length,Width-((Thick*2)+m),Height-((Thick*2)+m), type=type);}
+      translate([Thick,-5,0]){
+        cube([Length,Width+10,Height]);}
     }
   }
 }
@@ -184,7 +180,7 @@ module mbox_bpanel(type){
   
   difference(){
     union(){
-      color(Color2)
+      stl_colour(pp2_colour)
         translate ([-m/2,0,0])
           mbox_panels(type);
 
@@ -205,7 +201,7 @@ module mbox_fpanel(type){
   
   difference(){
     union(){
-      color(Color2)
+      stl_colour(pp2_colour)
         rotate([0,0,180])
           translate([-Length-m/2,-Width,0])
             mbox_panels(type);
@@ -225,7 +221,7 @@ module mbox_bshell(type){
   
   difference(){
     union(){
-      color(Color1)
+      stl_colour(pp1_colour)
         mbox_shell(type);
 
       if($children > 0)
@@ -245,7 +241,7 @@ module mbox_tshell(type){
   
   difference(){
     union(){
-      color(Color1)
+      stl_colour(pp1_colour)
         translate([0,Width,Height+0.2])
           rotate([0,180,180])
             mbox_shell(type);
