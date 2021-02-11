@@ -12,9 +12,9 @@ L = 110;        // Body Length
 
 BezelW = 48;    // Bezel Width
 BezelH = 48;    // Bezel Height
-BezelL = 5;     // Bezel Length
+BezelL = 6.5;   // Bezel Length
 
-Slop = 0.2;    // Fitment slop
+Slop = 0.6;    // Fitment slop
 
 // Examples
 %ta4();
