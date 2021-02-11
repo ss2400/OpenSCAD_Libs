@@ -9,7 +9,7 @@ $fn=100;
 W = 15.9;     // Body Width
 H = 7.9;      // Body Height
 L = 25.4;     // Body Length
-Hole = 2.5;   // Hole Diameter
+Hole = 2;     // Hole Diameter
 Offset = 7.1; // Hole offset from front
 T = 3;        // Mount lip thickness
 
@@ -31,15 +31,21 @@ module kcouple() {
     color("Gray")
       translate([0, 0, -L/2])
         rounded_cube_xy([W, H, L], r=1, xy_center=true, z_center=true);
-
-    // Openings
+    
     color("Silver") {
+      // Narrow + terminal
       translate([-3.95, 0, -L/4+0.01])
         cube([2.3, 2, L/2], center=true);
-        
+
+      // Wide - terminal  
       translate([3.95, 0, -L/4+0.01])
         cube([3.3, 2, L/2], center=true);
     }
+    
+    // Screw hole
+    translate([0, 0, -Offset])
+      rotate([90, 0, 0])
+        cylinder(d=Hole, h=H+20, center=true);
   }    
 }
 
@@ -57,7 +63,7 @@ module kcouple_cutout() {
     // Screw hole
     translate([0, 0, -Offset])
       rotate([90, 0, 0])
-        #cylinder(d=Hole, h=H+20, center=true);
+        cylinder(d=Hole+0.2, h=H+20, center=true);
   }
 }
 
