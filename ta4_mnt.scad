@@ -1,4 +1,5 @@
 // ta4_mnt.scad - TA4 PID controller mount in OpenSCAD
+// Coordinators are center, front face
 
 include <NopSCADlib/lib.scad>
 
@@ -13,11 +14,11 @@ BezelW = 48;    // Bezel Width
 BezelH = 48;    // Bezel Height
 BezelL = 5;     // Bezel Length
 
-Slop = 0.18;    // Fitment slop
+Slop = 0.2;    // Fitment slop
 
 // Examples
-ta4();
-translate([0,0,40])
+%ta4();
+translate([60,0,0])
   ta4_mount(thick=10);
   
 // TA4 model

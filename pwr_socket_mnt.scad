@@ -1,4 +1,6 @@
 // power3pin.scad - Snap in 3 Pin power socket mount in OpenSCAD
+// Model reference is center face
+// Mount reference is center face
 
 include <NopSCADlib/lib.scad>
 
@@ -9,72 +11,74 @@ FaceW = 27;       // Face Width
 FaceH = 27;       // Face Height
 FaceL = 3.5;      // Face Length
 
-BodyW = 27;       // Body Width
-BodyH = 27;       // Body Height
-BodyL = 24;       // Body Length
-
-function FuncX() = [0.8,1.0 ,1.2 ,1.6];
-function FuncL() = [24 ,24.6,25.2,26.2];
-   
+BodyL = 24-3.5;   // Body Length
 
 // Examples
-//ta4();
-translate([0,0,40])
-  ta4_mount();
+%translate ([0,0,0])
+  ta4();
+  
+#translate([30,0,0])
+  ta4_mount()
+    translate([0,0,-2])
+      cube([30,30,4], center=true);
   
 // TA4 model
 module ta4() {
-  union() {
-    // Body
-    translate([0, 16.3/2, 0])
+  translate([0,-11,(FaceL-BodyL)/2]) {
+    difference() {
       color("Gray")
-        cube([18.0, 16.3, BodyL-FaceL], center=true);
+        union() {
+          // Body
+          translate([0, 15.6/2, 0])
+            cube([17.2, 15.6, BodyL], center=true);
         
-    translate([0, 22/2, 0])
-      color("Gray")
-        cube([9.1, 22, BodyL-FaceL], center=true);
+          translate([0, 21.8/2, 0])
+            cube([8.6, 21.8, BodyL], center=true);
 
-    translate([0, 22/2 ,0])
-      color("Gray")
-        cube([24, 10.6, BodyL-FaceL], center=true);
+          translate([0, 21.8/2,0])
+            cube([24, 9.9, BodyL], center=true);
         
-    // Face
-    translate([0, 22/2 , (BodyL-FaceL)/2])
-      color("Gray")
-        cube([FaceW, FaceH, FaceL], center=true);
-        
+          // Face
+          translate([0, 22/2, (BodyL)/2])
+            cube([FaceW, FaceH, FaceL], center=true);
+        }
+        color("Silver") {
+          // Ground
+          translate([0, 18, (BodyL+FaceL)/2])
+            cylinder(d=5.4, h = 15, center=true);
+    
+          // Blade
+          translate([-6.3, 5.3, (BodyL+FaceL)/2])
+            cube([3.2, 8, 15], center=true);
+      
+          // Blade
+          translate([6.3, 5.3, (BodyL+FaceL)/2])
+            cube([3.2, 8, 15], center=true);
+        }
+    }
   }
 }
 
 // TA4 mount cutout
 module ta4_cutout() {
-  union() {
-    // Body
-    translate([0, 16.3/2, 0])
-      color("Gray")
-        cube([18.0, 16.3, BodyL-FaceL], center=true);
-        
-    translate([0, 22/2, 0])
-      color("Gray")
-        cube([9.1, 22, BodyL-FaceL], center=true);
-
-    for (i = [0:3]) {
-      translate([FuncX(i), 22/2 ,0])
-        color("Gray")
-          cube([FuncL(i), 10.6, BodyL-FaceL], center=true);
-          echo(i);
+  translate([0,-11,-BodyL/2+0.01]) {
+    union() {
+      // Body
+      translate([0, 22/2, 0])
+        cube([17.7, 22, BodyL], center=true);
+      
+      // Wings
+      translate([0, 22/2 , -1.6/2])
+        cube([23.6, 10, BodyL-1.6], center=true);
     }
   }
 }
-ta4_cutout();
 
 // Processing module
 module ta4_mount() {
   difference() {
     union() {
       children();
-      //translate([0, 0, -thick/2])
-        //cube([BezelW+10, BezelH+10,thick], center=true);
     }
     ta4_cutout();
   }
