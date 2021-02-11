@@ -1,6 +1,6 @@
 // power3pin.scad - Snap in 3 Pin power socket mount in OpenSCAD
-// Model reference is center face
-// Mount reference is center face
+// Coordinators are center, front face
+
 
 include <NopSCADlib/lib.scad>
 
