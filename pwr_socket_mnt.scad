@@ -16,7 +16,7 @@ BodyL = TotalL - FaceL;
 %translate ([0,0,0])
   ta4();
 
-#translate([34,0,0])
+translate([34,0,0])
   ta4_mount()
     translate([0,0,-2])
       rounded_cube_xy([34,34,4], r=3, xy_center=true, z_center=true);
@@ -29,7 +29,7 @@ module ta4() {
   offset = 11;
   z = FaceL;
   
-  !translate([0,0,(z-BodyL)/2]) {
+  translate([0,0,(z-BodyL)/2]) {
     difference() {
       color("Gray")
         union() {
@@ -68,7 +68,7 @@ module ta4() {
 module ta4_cutout() {
   // Measurements from panel cut-out drawing
   // XY Center @ origin
-  // Surface a smidge above Z origin @ z=0.01
+  // Surface a smidgen above Z origin @ z=0.01
   offset = 11;
   z = 0.01;
   
@@ -77,17 +77,17 @@ module ta4_cutout() {
     union() {
       // Wide body section (blades)
       translate([0, 6/2-offset, 0])
-        cube([18.0, 6, BodyL], center=true);
+        cube([18, 6.3, BodyL], center=true);
         
       // Narrow body section (ground)
-      cube([9.1, 22, BodyL], center=true);
+      cube([9.3, 22.3, BodyL], center=true);
         
       // Snap clearance L = 24 to 26.2
-      cube([24, 10.6, BodyL], center=true);
+      cube([24, 10.7, BodyL], center=true);
       
-      // Set effective panel thickness (1.6mm) for snaps
-      translate([0, 0 , -1.6/2])
-        cube([30, 10.6, BodyL-1.6], center=true);
+      // Set effective panel thickness (0.8mm to 1.6mm) for snaps
+      translate([0, 0 , -1.4/2])
+        cube([28, 10.6, BodyL-1.6], center=true);
     }
   }
 }

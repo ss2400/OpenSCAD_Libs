@@ -6,15 +6,15 @@ include <NopSCADlib/lib.scad>
 $fn=100;
 
 // Dimensions
-W = 15.9;     // Body Width
+W = 16.9;     // Body Width
 H = 7.9;      // Body Height
 L = 25.4;     // Body Length
-Hole = 2;     // Hole Diameter
+Hole = 2.5;   // Hole Diameter
 Offset = 7.1; // Hole offset from front
-T = 3;        // Mount lip thickness
+T = 2;        // Mount lip thickness
 
-Radius = 4;   // Backing radius
-Slop = 0.6;   // Fitment slop
+Radius = 2;   // Backing radius
+Slop = 0.4;   // Fitment slop
 
 // Examples
 %kcouple();
@@ -63,7 +63,7 @@ module kcouple_cutout() {
     // Screw hole
     translate([0, 0, -Offset])
       rotate([90, 0, 0])
-        cylinder(d=Hole+0.2, h=H+20, center=true);
+        cylinder(d=Hole+Slop, h=H+20, center=true);
   }
 }
 

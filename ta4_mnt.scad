@@ -12,15 +12,15 @@ L = 110;        // Body Length
 
 BezelW = 48;    // Bezel Width
 BezelH = 48;    // Bezel Height
-BezelL = 8;     // Bezel Length
+BezelL = 8.3;   // Bezel Length
 
 Radius = 4;     // Backing radius
 Slop = 0.6;     // Fitment slop
 
 // Examples
-%ta4(offset=5);
+%ta4(offset=7);
 translate([60,0,0])
-  ta4_mount(thick=10, offset=5);
+  ta4_mount(thick=10, offset=7);
 
 // Model
 module ta4(offset=0) {
