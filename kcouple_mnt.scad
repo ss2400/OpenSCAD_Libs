@@ -75,7 +75,6 @@ module kcouple_mount(thick=10) {
         translate([0, 0, -thick/2])
           rounded_cube_xy([W+T*2, H+T*2,thick], r=Radius, xy_center=true, z_center=true);
     }
-    translate([0, 0, 0])
-      kcouple_cutout();
+    kcouple_cutout();
   }
 }

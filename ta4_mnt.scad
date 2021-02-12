@@ -42,18 +42,18 @@ module ta4(offset=0) {
 }
 
 // Mount cutout
-module ta4_cutout() {
+module ta4_cutout(offset=0) {
   // Measurements taken from real part and drawing
   // XY Center @ origin
   // Face flush @ Z origin
 
   union() {
     // Body
-    translate([0, 0, -L/8+0.02])
+    translate([0, 0, -L/8+0.02-offset])
       cube([W+Slop, H+Slop, L/4], center=true);
 
     // Face Bezel
-    translate([0, 0, BezelL/2+0.01])
+    translate([0, 0, BezelL/2+0.01-offset])
       cube([BezelW+Slop, BezelH+Slop, BezelL+0.01], center=true);
   }
 }
@@ -66,7 +66,6 @@ module ta4_mount(thick=10, offset=0) {
       translate([0, 0, -thick/2])
         rounded_cube_xy([BezelW+10, BezelH+10,thick], r=Radius, xy_center=true, z_center=true);
     }
-    translate([0, 0, -offset])
-      ta4_cutout();
+    ta4_cutout(offset=offset);
   }
 }
