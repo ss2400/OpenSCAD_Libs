@@ -53,8 +53,8 @@ module ta4_cutout(offset=0) {
       cube([W+Slop, H+Slop, L/4], center=true);
 
     // Face Bezel
-    translate([0, 0, BezelL/2+0.01-offset])
-      cube([BezelW+Slop, BezelH+Slop, BezelL+0.01], center=true);
+    translate([0, 0, BezelL+0.01-offset])
+      cube([BezelW+Slop, BezelH+Slop, BezelL*2+0.01], center=true);
   }
 }
 
