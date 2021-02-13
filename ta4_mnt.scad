@@ -64,7 +64,11 @@ module ta4_mount(thick=10, offset=0) {
     union() {
       children();
       translate([0, 0, -thick/2])
-        rounded_cube_xy([BezelW+10, BezelH+10,thick], r=Radius, xy_center=true, z_center=true);
+        rounded_cube_xy([BezelW+6, BezelH+6,thick], r=Radius, xy_center=true, z_center=true);
+      translate([9, H/2+6, -thick/2])
+        rounded_cube_xy([10,10,thick], r=1, xy_center=true, z_center=true);  
+      translate([-9, -H/2-6, -thick/2])
+        rounded_cube_xy([10,10,thick], r=1, xy_center=true, z_center=true);  
     }
     ta4_cutout(offset=offset);
   }
