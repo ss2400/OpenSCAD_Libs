@@ -28,7 +28,7 @@ module kcouple() {
   // Face above Z origin
   difference() {
     // Body
-    color("Gray")
+    color("Yellow")
       translate([0, 0, -L/2])
         rounded_cube_xy([W, H, L], r=1, xy_center=true, z_center=true);
     
