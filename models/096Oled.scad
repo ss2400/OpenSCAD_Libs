@@ -159,7 +159,8 @@ module DisplayModule(type=CRIUS, align=2, G_COLORS=true) {
         difference() {
             // +++
             // PCB
-            roundedCube(PCB[type][0], r=PCB[type][3], sidesonly=true,center=true);
+            //roundedCube(PCB[type][0], r=PCB[type][3], sidesonly=true,center=true);
+            roundedBox(PCB[type][0], radius=PCB[type][3], sidesonly=true);
             // ---
             // Y borders cutouts
             for (i=[0:1:PCB[type][1]])
