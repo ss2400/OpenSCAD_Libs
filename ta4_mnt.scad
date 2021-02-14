@@ -14,6 +14,8 @@ BezelW = 48;    // Bezel Width
 BezelH = 48;    // Bezel Height
 BezelL = 8.3;   // Bezel Length
 
+BracketW = 10;  // Bracket bump distance from center
+
 Radius = 4;     // Backing radius
 Slop = 0.6;     // Fitment slop
 
@@ -63,12 +65,15 @@ module ta4_mount(thick=10, offset=0) {
   difference() {
     union() {
       children();
+      // Main
       translate([0, 0, -thick/2])
         rounded_cube_xy([BezelW+6, BezelH+6,thick], r=Radius, xy_center=true, z_center=true);
-      translate([9, H/2+6, -thick/2])
-        rounded_cube_xy([10,10,thick], r=1, xy_center=true, z_center=true);  
-      translate([-9, -H/2-6, -thick/2])
-        rounded_cube_xy([10,10,thick], r=1, xy_center=true, z_center=true);  
+      // Upper retention bump
+      translate([BracketW, H/2+6, -thick/2])
+        rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);
+        // Lower retention bump
+      translate([-BracketW, -H/2-6, -thick/2])
+        rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);  
     }
     ta4_cutout(offset=offset);
   }
