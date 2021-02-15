@@ -96,7 +96,7 @@ module nema515snap_cutout() {
       
       // Set effective panel thickness (0.8mm to 1.6mm) for snaps
       translate([0, 0 , -PanelThick/2])
-        cube([28, 10.6, BodyL-PanelThick], center=true);
+        cube([SnapCutout+5, 10.6, BodyL-PanelThick], center=true);
     }
   }
 }
