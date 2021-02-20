@@ -13,7 +13,7 @@ TotalL = 24;      // Face and body length combined
 BodyL = TotalL - FaceL;
 
 PanelThick = 1.4;   // See table
-SnapCutout = 25.2;  // See table
+SnapCutout = 26;    // See table
 /*
   X   L
   0.8 24
@@ -96,7 +96,7 @@ module nema515snap_cutout() {
       
       // Set effective panel thickness (0.8mm to 1.6mm) for snaps
       translate([0, 0 , -PanelThick/2])
-        cube([SnapCutout+5, 10.6, BodyL-PanelThick], center=true);
+        cube([SnapCutout+6, 10.6, BodyL-PanelThick], center=true);
     }
   }
 }
