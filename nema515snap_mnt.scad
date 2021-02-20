@@ -13,7 +13,7 @@ TotalL = 24;      // Face and body length combined
 BodyL = TotalL - FaceL;
 
 PanelThick = 1.4;   // See table
-SnapCutout = 26;    // See table
+SnapCutout = 24;    // See table
 /*
   X   L
   0.8 24
