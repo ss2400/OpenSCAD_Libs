@@ -18,13 +18,13 @@ Screw = 1.95;   // Screw hole size
 Slop = 0.18;    // Fitment slop
 
 // Examples
-hx711(h=5);
+hx711_component(h=5);
 hx711_mount(h=5);
 translate([-4,-4,0])
   cube([40,28,2]);
   
 // HX711 model
-module hx711(h=5, center=false) {
+module hx711_component(h=5, center=false) {
   translate([0, 0, 0.01]) {
     difference() {
       // PCB

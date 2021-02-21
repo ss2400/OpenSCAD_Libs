@@ -17,12 +17,12 @@ Radius = 2;   // Backing radius
 Slop = 0.4;   // Fitment slop
 
 // Examples
-%kcouple();
+%kcouple_component();
 translate([22,0,0])
-  kcouple_mount(thick=12);
+  kcouple_process(thick=12);
 
 // Model
-module kcouple() {
+module kcouple_component() {
   // Measurements taken from real part and drawing
   // XY Center @ origin
   // Face above Z origin
@@ -67,13 +67,18 @@ module kcouple_cutout() {
   }
 }
 
-// Processing module
+// Mount base
 module kcouple_mount(thick=10) {
+  translate([0, 0, -thick/2])
+    rounded_cube_xy([W+T*2, H+T*2,thick], r=Radius, xy_center=true, z_center=true);
+}
+
+// Processing module
+module kcouple_process(thick=10) {
   difference() {
     union() {
       children();
-        translate([0, 0, -thick/2])
-          rounded_cube_xy([W+T*2, H+T*2,thick], r=Radius, xy_center=true, z_center=true);
+      kcouple_mount(thick=thick);
     }
     kcouple_cutout();
   }

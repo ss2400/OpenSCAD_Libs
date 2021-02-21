@@ -18,13 +18,13 @@ Mnt_L = L + Mnt_Lip/2;
 Mnt_W = W;
 Mnt_T = 2; 
 
-metro_mini();
+metro_mini_component();
 metro_mini_mount();
 
-module metro_mini() {
+module metro_mini_component() {
   translate([0, Mnt_T/2, Height])
   rotate([0,0,0])
-    %import("stl/2590 Metro Mini Rev B.stl", convexity =4);
+    %import("models/2590 Metro Mini Rev B.stl", convexity =4);
 }
 
 module metro_mini_mount() {

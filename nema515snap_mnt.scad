@@ -23,15 +23,15 @@ SnapCutout = 24;    // See table
 */
 
 // Examples
-%nema515snap();
+%nema515snap_component();
 
 translate([34,0,0])
-  nema515snap_mount()
+  nema515snap_process()
     translate([0,0,-2])
       rounded_cube_xy([34,34,4], r=3, xy_center=true, z_center=true);
 
 // Model
-module nema515snap() {
+module nema515snap_component() {
   // Measurements taken from real part and drawing
   // XY Center @ origin
   // Face above Z origin
@@ -101,9 +101,8 @@ module nema515snap_cutout() {
   }
 }
 
-  
 // Processing module
-module nema515snap_mount() {
+module nema515snap_process() {
   difference() {
     union() {
       children();

@@ -9,7 +9,7 @@ glass_slop = 1.0; // Additional tolerance for glass
 
 // Examples
 face = 2.4; // Face plate thickness
-oled_mount(type=DORHEA)
+oled_process(type=DORHEA)
   translate([-20,-20,0])
     cube([40,40,face], center=false);
 DisplayModule(type=DORHEA, align=1, G_COLORS=true);
@@ -42,7 +42,7 @@ module oled_cutout(type=undef) {
 }
 
 // OLED mounting posts (Reduced by slop)
-module oled_posts(type=undef) {
+module oled_mount(type=undef) {
   for (i=[0:1:len(HOLES[type])-1])
     hull() {
       for (j=[0:1:len(HOLES[type][i])-1])
@@ -52,10 +52,10 @@ module oled_posts(type=undef) {
 }
 
 // Processing module
-module oled_mount(type=undef) {
+module oled_process(type=undef) {
   difference() {
     children();
     oled_cutout(type=type);
   }
-  oled_posts(type=type);
+  oled_mount(type=type);
 }

@@ -17,13 +17,13 @@ Slop = 0.18;    // Fitments slop
 
 // Examples
 translate([0,0,2-0.01]) {
-  nano(h=10);
+  nano_component(h=10);
   nano_mount(h=10);
   }
 translate([-4,-4,0])
   cube([54,26,2]);
 
-module nano(h=5) {
+module nano_component(h=5) {
   // USB mini connector
   translate([3, W/2, h+T+2+0.01])
     rotate([0,180,270])
