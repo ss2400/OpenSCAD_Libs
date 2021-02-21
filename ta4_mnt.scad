@@ -20,12 +20,12 @@ Radius = 4;     // Backing radius
 Slop = 0.6;     // Fitment slop
 
 // Examples
-%ta4(offset=7);
+%ta4_component(offset=7);
 translate([60,0,0])
-  ta4_mount(thick=10, offset=7);
+  ta4_process(thick=10, offset=7);
 
 // Model
-module ta4(offset=0) {
+module ta4_component(offset=0) {
   // Measurements taken from real part and drawing
   // XY Center @ origin
   // Face above Z origin
@@ -60,20 +60,25 @@ module ta4_cutout(offset=0) {
   }
 }
 
-// Processing module
+// Mount base
 module ta4_mount(thick=10, offset=0) {
+  // Main
+  translate([0, 0, -thick/2])
+    rounded_cube_xy([BezelW+6, BezelH+6,thick], r=Radius, xy_center=true, z_center=true);
+  // Upper retention bump
+  translate([BracketW, H/2+6, -thick/2])
+    rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);
+  // Lower retention bump
+  translate([-BracketW, -H/2-6, -thick/2])
+    rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);  
+}
+
+// Processing module
+module ta4_process(thick=10, offset=0) {
   difference() {
     union() {
       children();
-      // Main
-      translate([0, 0, -thick/2])
-        rounded_cube_xy([BezelW+6, BezelH+6,thick], r=Radius, xy_center=true, z_center=true);
-      // Upper retention bump
-      translate([BracketW, H/2+6, -thick/2])
-        rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);
-        // Lower retention bump
-      translate([-BracketW, -H/2-6, -thick/2])
-        rounded_cube_xy([11,10,thick], r=1, xy_center=true, z_center=true);  
+      ta4_mount(thick=thick, offset=offset);
     }
     ta4_cutout(offset=offset);
   }
